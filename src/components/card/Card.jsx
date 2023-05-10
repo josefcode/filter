@@ -3,8 +3,8 @@ import { styled } from '@mui/material'
 
 
 const StyledRoot = styled('div')({
-   width: '450px',
-   height: '200px',
+   width: '300px',
+   height: '100px',
    borderRadius: '8px',
    border: '1px solid gray',
    display: 'flex',
@@ -12,14 +12,16 @@ const StyledRoot = styled('div')({
    justifyContent: 'space-between',
    gap: '10px',
 
+
    '& .image': {
-    width: '200px',
-    height: '200px',
-    borderRadius: '8px'
+    width: '100px',
+    height: '100px',
+    borderRadius: '8px',
+    
    },
-  //  '& .description': {
-  //   marginRight: 'auto'
-  //  }
+   '& .description': {
+    fontSize: '12px'
+   }
 })
 
 export default function Card({url,alt, discription, title , onClick, price}) {
@@ -29,11 +31,11 @@ export default function Card({url,alt, discription, title , onClick, price}) {
         <img className = "image"  src = {url} alt = {alt} />
       
         <div className='description'>
-        <p>
+        <span>
             {discription}
-        </p>
-        <p>{title}</p>
-        <p>{price}</p>
+        </span>
+        <span>{title}</span>
+        <span>{price}</span>
         </div>
     </StyledRoot>
   )

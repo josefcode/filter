@@ -2,7 +2,18 @@ import React, {useState, useEffect}from 'react'
 import NavBar from '../../components/navbar/NavBar'
 import axios from 'axios'
 import Card from '../../components/card/Card'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import {styled} from '@mui/material'
+
+export const Cards = styled('div')({
+  display:'flex',
+   flexWrap : 'wrap',
+    gap: '20px', 
+    paddingBlockStart: '1rem',
+     alignItems: 'center',
+     padding: '1rem',
+     justifyContent: 'center'
+})
 
 
 const url = "https://dummyjson.com/products"
@@ -10,8 +21,6 @@ const url = "https://dummyjson.com/products"
 export default function Home() {
 
 const [products, setProducts ] = useState([])
-
-const {id} = useParams()
 
   useEffect(() => {
    fetchProducts()
@@ -29,7 +38,7 @@ const {id} = useParams()
   return (
     <>
     <NavBar />
-    <div style = {{display:'flex', flexWrap : 'wrap', gap: '20px', paddingBlockStart: '1rem', alignItems: 'center'}}>
+    <Cards >
     {
       products.map(prod => {
         const { title, id, description, price, images } = prod
@@ -48,7 +57,7 @@ const {id} = useParams()
         )
       })
     }
-    </div>
+    </Cards>
    </>
     )
   {/* return (

@@ -4,6 +4,7 @@ import Card from '../../../components/card/Card'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { styled } from '@mui/material'
+import { Cards } from '../Index'
 
 const Root  = styled('div')({
   display: 'flex',
@@ -23,11 +24,23 @@ const Root  = styled('div')({
     borderRadius: '10px'
   }
 })
+const StyledProductList  = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  lineHeight: 2,
+  marginBlock: '1rem',
+})
+
+const Typography = styled('h2')({
+  textAlign: 'center'
+})
 
 // const url = 'https://dummyjson.com/products/'
 export default function Product() {
     const [product, setProduct ] = useState([])
     const [products, setProducts ] = useState([])
+
     const {id} = useParams()
 
     useEffect(() => {
@@ -47,24 +60,17 @@ export default function Product() {
       }
 
     //   const {url, alt, discription, title , price } = products?.data
-     const filtredProduct = products.filter(item => {
-      console.log(id)
-      if(item.id === id){
-        return item.slice()
-      }
- 
-     })
+    let filteredProducts = products.filter(product => product.id != id)
+
+
+
     
-     console.log(filtredProduct)
+    
+     console.log(filteredProducts)
   return (
     <div>
         <NavBar />
-        {/* <Card 
-        url = {products.data?.images[0]}
-        alt = {products.data?.title}
-        discription = {products.data?.description}
-        title = {products.data?.title}
-        /> */}
+
         <Root>
           <img className = 'productImage' src = {product.data?.images[0]} alt = {product.data?.title} />
           <div>
@@ -76,14 +82,14 @@ export default function Product() {
         </Root>
 
         <div>
-          <h2>Veja outros produtos </h2>
-
+          <Typography> Veja outros produtos </Typography>
+   <Cards className='productsList'>
     {
-      products.map(prod => {
+      filteredProducts.map(prod => {
         const { title, id, description, price, images } = prod
 
         return (
-          <Link to = {`/product/${id}`}>
+          // <Link to = {`product/${id}`}>
           <Card
           url = {images[0]}
           alt = {title}
@@ -92,11 +98,11 @@ export default function Product() {
           price = {price}
           
           />
-          </Link>
+          // </Link>
         )
       })
     }
-          
+          </Cards>
         </div>
         </div>
   )
