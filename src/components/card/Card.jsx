@@ -4,7 +4,7 @@ import { styled } from '@mui/material'
 
 const StyledRoot = styled('div')({
    width: '300px',
-   height: '100px',
+   minHeight: '100px',
    borderRadius: '8px',
    border: '1px solid gray',
    display: 'flex',
@@ -14,9 +14,10 @@ const StyledRoot = styled('div')({
 
 
    '& .image': {
-    width: '100px',
-    height: '100px',
+    width: '80px',
+    height: '80px',
     borderRadius: '8px',
+    marginInline: '10px'
     
    },
    '& .description': {
@@ -31,11 +32,13 @@ export default function Card({url,alt, discription, title , onClick, price}) {
         <img className = "image"  src = {url} alt = {alt} />
       
         <div className='description'>
+        <h2>{title}</h2>
         <span>
             {discription}
         </span>
-        <span>{title}</span>
-        <span>{price}</span>
+        <div className = "price">
+        <span >R$ {price}</span>
+        </div>
         </div>
     </StyledRoot>
   )

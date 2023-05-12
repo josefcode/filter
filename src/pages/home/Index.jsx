@@ -14,6 +14,20 @@ export const Cards = styled('div')({
      padding: '1rem',
      justifyContent: 'center'
 })
+export const Root = styled('div')({
+   'a': {
+    textDecoration: 'none',
+   },
+   'h2': {
+    color: '#F3BD30'
+   },
+   'span': {
+    color: 'black'
+   },
+   '& .price': {
+    marginBlockStart: '5px'
+   }
+})
 
 
 const url = "https://dummyjson.com/products"
@@ -32,19 +46,16 @@ const [products, setProducts ] = useState([])
     setProducts(response.data.products)
   }
 
-  function handleLink(){
-    alert('hello')
-  }
   return (
-    <>
+    <Root>
     <NavBar />
     <Cards >
     {
       products.map(prod => {
         const { title, id, description, price, images } = prod
-
+       console.log(title)
         return (
-          <Link to = {`/product/${id}`}>
+          <Link to = {`/product/${id}`} >
           <Card
           url = {images[0]}
           alt = {title}
@@ -58,7 +69,7 @@ const [products, setProducts ] = useState([])
       })
     }
     </Cards>
-   </>
+   </Root>
     )
   {/* return (
     <div>
