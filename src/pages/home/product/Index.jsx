@@ -66,7 +66,7 @@ export default function Product() {
 
   return (
     <div>
-        <NavBar />
+        <NavBar voltar/>
 
         <Root>
           <img className = 'productImage' src = {product.data?.images[0]} alt = {product.data?.title} />
@@ -86,7 +86,7 @@ export default function Product() {
         const { title,id, description, price, images } = prod
 
         return (
-          <Link to = {`/product/${id}`}> 
+          <Link to = {`/product/${id}`} key = {id}> 
           <Card
           id = {id}
           url = {images[0]}

@@ -36,9 +36,13 @@ export default function Home() {
 
 const [products, setProducts ] = useState([])
 
+const [email, setEmail] = useState(null)
+
   useEffect(() => {
    fetchProducts()
-  }, [])
+   const response = localStorage.getItem('email')
+   setEmail(response)
+  }, [email])
 
   async function fetchProducts(){
     const response = await axios(url)
@@ -48,14 +52,14 @@ const [products, setProducts ] = useState([])
 
   return (
     <Root>
-    <NavBar />
+    <NavBar showLoginButtons email={email}/>
     <Cards >
     {
       products.map(prod => {
         const { title, id, description, price, images } = prod
-       console.log(title)
+ 
         return (
-          <Link to = {`/product/${id}`} >
+          <Link to = {`/product/${id}`} key = {id} >
           <Card
           url = {images[0]}
           alt = {title}
@@ -71,10 +75,6 @@ const [products, setProducts ] = useState([])
     </Cards>
    </Root>
     )
-  {/* return (
-    <div>
-        <NavBar />
-    </div>
-  ) */}
+
 }
 

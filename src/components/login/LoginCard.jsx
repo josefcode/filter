@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import NavBar from '../navbar/NavBar'
 import { styled } from '@mui/material'
 import { useNavigate } from "react-router-dom";
+import {useLogout} from '../../hooks/loginData'
 
 const Form = styled('form')({
   background:  '#fff',
@@ -53,11 +54,15 @@ const Input = styled('input')({
 
 
 export default function LoginCard() {
+
+  const {data, setData} = useLogout()
+
+
   const navigate = useNavigate()
-  const [data, setData] = useState({
-    email: '',
-    senha: ''
-  })
+  // const [data, setData] = useState({
+  //   email: '',
+  //   senha: ''
+  // })
 
 
 
@@ -69,14 +74,19 @@ export default function LoginCard() {
         [name]: value
       }
     })
+    
   }
+
+ 
+
+
 
   function handleSubmit(event) {
 
     event.preventDefault()
     
     // submitToApi(formData)
-    
+    localStorage.setItem("email", data.email)
     navigate("/");
     
     }
@@ -85,7 +95,7 @@ export default function LoginCard() {
  
     <>
     
-    <NavBar/>
+    <NavBar voltar />
    
     <Root>
     <Form onSubmit={handleSubmit} >

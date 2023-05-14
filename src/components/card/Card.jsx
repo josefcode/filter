@@ -1,6 +1,6 @@
-import React from 'react'
+// import React from 'react'
 import { styled } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const StyledRoot = styled('div')({
    width: '300px',
@@ -25,8 +25,12 @@ const StyledRoot = styled('div')({
    }
 })
 
+/**
+ * Represents a book.
+ * @constructor
+ */
 export default function Card({url,alt, discription, title , id, price}) {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   return (
     <StyledRoot className='cardContainer' >
        

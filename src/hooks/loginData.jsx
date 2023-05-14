@@ -2,40 +2,53 @@
 import { createContext, useContext, useState, useEffect } from "react"
 
 // Ciração do Contexto
-const LoginContext = createContext()
+const LogoutContext = createContext()
 
 // Criação do Provedor para o Contexto
-export function LoginProvider(props) {
+export function LogoutProvider(props) {
 
-    // State que irá controlar qual Tema a aplicação está usando
-    const [login, setLogin] = useState('')
+  
+    const [data, setData] = useState({
+        email: '',
+        senha: ''
+    })
 
-    useEffect(()=> {
-        const response  = localStorage.get('email')
-        setLogin(response)
-    }, [])
+    // useEffect(()=> {
+    //     const response  = localStorage.remove('email')
+    //     setData(prev => {
+    //        return {
+    //         ...prev, response
+    //        }
+    //     })
+    // }, [])
 
-    // Função responsável por Trocar o Tema
-    function changeLogin(info) {
-        setLogin(info)
-        localStorage.setItem('email', info)
-    }
+   
+    // function changeLogin(e) {
+    //     setData(prev => {
+    //         const {value , name} = e.target
+    //         return {
+    //           ...prev,
+    //           [name]: value
+    //         }
+    //       })
+    //     localStorage.setItem('email', e)
+    // }
 
     return (
 
         // Construção dos Elementos para utilizarmos o Contexto em nossa Aplicação, tudo o que for contido no "value" será exportado e poderá ser utilizado em Componentes que utilizarem o Hook Customizado "useTheme"
-        <LoginContext.Provider value={{ login, changeLogin }}>
+        <LogoutContext.Provider value={{ data, setData }}>
             {props.children}
-        </LoginContext.Provider>
+        </LogoutContext.Provider>
 
     )
 
 }
 
 // Hook Personalizado que irá ser utilizado quando quisermos utilizar alguma das Funcionalidades contidas em nosso Contexto
-export function useLogin() {
+export function useLogout() {
 
-    const context = useContext(LoginContext)
+    const context = useContext(LogoutContext)
 
     return context
 
