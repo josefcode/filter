@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@mui/material'
-
+import { useNavigate } from 'react-router-dom'
 
 const StyledRoot = styled('div')({
    width: '300px',
@@ -25,9 +25,10 @@ const StyledRoot = styled('div')({
    }
 })
 
-export default function Card({url,alt, discription, title , onClick, price}) {
+export default function Card({url,alt, discription, title , id, price}) {
+  const navigate = useNavigate()
   return (
-    <StyledRoot className='cardContainer'>
+    <StyledRoot className='cardContainer' >
        
         <img className = "image"  src = {url} alt = {alt} />
       

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import NavBar from '../navbar/NavBar'
 import { styled } from '@mui/material'
+import { useNavigate } from "react-router-dom";
 
 const Form = styled('form')({
   background:  '#fff',
@@ -17,7 +18,7 @@ const Form = styled('form')({
 
 const Root = styled('div')({
   background: '#512DA8',
-  height: '86vh',
+  height: '100vh',
   display: 'flex',
   gridAria: "main",
   justifyContent: 'center',
@@ -52,11 +53,34 @@ const Input = styled('input')({
 
 
 export default function LoginCard() {
-
+  const navigate = useNavigate()
   const [data, setData] = useState({
-    eamil: '',
-    password: ''
+    email: '',
+    senha: ''
   })
+
+
+
+  const handleChange = (e) => {
+    setData(prev => {
+      const {value , name} = e.target
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  }
+
+  function handleSubmit(event) {
+
+    event.preventDefault()
+    
+    // submitToApi(formData)
+    
+    navigate("/");
+    
+    }
+
   return (
  
     <>
@@ -64,12 +88,23 @@ export default function LoginCard() {
     <NavBar/>
    
     <Root>
-    <Form >
+    <Form onSubmit={handleSubmit} >
     <h1>login</h1>
     <p>Insira seus dados para entrar no 
     sistema</p>
-    <Input type = 'text' placeholder='email' required />
-    <Input type = 'text' placeholder='Senha' required/>
+    <Input 
+    type = 'text' 
+    placeholder='email'
+    name = 'email'
+    onChange = {handleChange} 
+    required 
+    />
+    <Input 
+    type = 'text' 
+    placeholder='Senha' 
+    name = 'senha'
+    onChange = {handleChange} 
+    required/>
     <Button type = 'submit'>Entrar</Button>
    </Form>
    </Root>

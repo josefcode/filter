@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../../../components/navbar/NavBar'
 import Card from '../../../components/card/Card'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { styled } from '@mui/material'
 import { Cards } from '../Index'
@@ -38,6 +38,7 @@ const Typography = styled('h2')({
 
 // const url = 'https://dummyjson.com/products/'
 export default function Product() {
+   const navigate = useNavigate()
     const [product, setProduct ] = useState([])
     const [products, setProducts ] = useState([])
 
@@ -46,7 +47,7 @@ export default function Product() {
     useEffect(() => {
         fetchProduct()
         fetchProducts()
-    }, [])
+    }, [id])
 
     async function fetchProduct(){
         const response = await axios(`https://dummyjson.com/products/${id}`)
@@ -63,10 +64,6 @@ export default function Product() {
     let filteredProducts = products.filter(product => product.id != id)
 
 
-
-    
-    
-     console.log(filteredProducts)
   return (
     <div>
         <NavBar />
@@ -86,19 +83,21 @@ export default function Product() {
    <Cards className='productsList'>
     {
       filteredProducts.map(prod => {
-        const { title, id, description, price, images } = prod
+        const { title,id, description, price, images } = prod
 
         return (
-          // <Link to = {`product/${id}`}>
+          <Link to = {`/product/${id}`}> 
           <Card
+          id = {id}
           url = {images[0]}
           alt = {title}
           title = {title}
           discription= {description}
           price = {price}
+       
           
           />
-          // </Link>
+   </Link>
         )
       })
     }
